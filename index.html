@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Couscous Royal</title>
+    <title>Nwasser au poulet</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -18,27 +18,21 @@
         }
         header {
             display: flex;
-            flex-direction: column;
+            flex-direction: column; 
             justify-content: center;
             align-items: center;
             background-color: #bdc9cc;
             color: Black;
             border-radius: 8px;
             padding: 10px;
-            text-align: center;
-            position: relative;
-        }
-        header .logo {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            width: 100px;
+            text-align: center; 
         }
         header .flags {
-            margin-top: 10px;
+            margin-top: 10px; 
         }
         header h1 {
             margin: 0;
+            font-size: 1.8em; /* Ajustement pour l'affichage mobile */
         }
         .flags img {
             width: 30px;
@@ -48,22 +42,20 @@
             cursor: pointer;
             transition: transform 0.5s ease-in-out;
         }
-
         .flags img:hover {
             transform: scale(1.5);
         }
         .dish-image {
-            display: block;
-            width: 60%;
+            display: block;  
+            width: 100%; /* S'assurer que l'image est réactive */
             max-width: 700px;
-            margin: 0 auto;
+            margin: 20px auto;  
             border-radius: 20px;
             transition: transform 0.5s ease-in-out;
         }
         .dish-image:hover {
-            transform: scale(1.01); rotate(5deg); /* Agrandissement et légère rotation */
-            opacity: 0.5; /* Réduction légère de l'opacité */
-        
+            transform: scale(1.01); 
+            opacity: 0.5; 
         }
         .logo {
             display: block;
@@ -73,21 +65,15 @@
             border-radius: 20px;
             transition: transform 0.5s ease-in-out;
         }
-
         .logo:hover {
             transform: scale(1.1);
-
         }
-        .overview, .calories, .components, .allergies, .history, .serving {
+        .overview, .calories, .components, .allergies, .history, .serving, .nutrition-info {
             padding: 20px;
             border-radius: 8px;
             margin-bottom: 20px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: transform 0.5s ease-in-out;
-        }
-
-        .overview:hover {
-            transform: scale(1.01);
+            background-color: white; /* Mieux pour la lisibilité */
         }
         .overview {
             background-color: #f8f8f8;
@@ -107,9 +93,20 @@
         .serving {
             background-color: #e8f7e8;
         }
-        .overview h2, .calories h2, .components h2, .allergies h2, .history h2, .serving h2 {
+        .nutrition-info {
+            background-color: #e0f7fa;
+        }
+        .overview h2, .calories h2, .components h2, .allergies h2, .history h2, .serving h2, .nutrition-info h2 {
             margin-top: 0;
             color: #e94e77;
+        }
+        .nutrition-table {
+            width: 100%;
+            text-align: left;
+            margin-top: 10px;
+        }
+        .nutrition-table td {
+            padding: 8px;
         }
         .back-to-top {
             text-align: center;
@@ -123,145 +120,271 @@
         .back-to-top a:hover {
             text-decoration: underline;
         }
+
+        /* Media Queries pour ajustement mobile */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.5em; /* Taille de police plus petite pour mobile */
+            }
+            .dish-image {
+                width: 100%; /* Image prend toute la largeur */
+            }
+            .flags img {
+                width: 25px; /* Réduire la taille des icônes de drapeau */
+            }
+            .nutrition-table td {
+                padding: 5px; /* Réduire la marge intérieure des cellules */
+            }
+            .overview, .calories, .components, .allergies, .history, .serving, .nutrition-info {
+                padding: 15px; /* Réduire le rembourrage pour mobile */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .dish-image {
+                margin: 10px 0; /* Réduire les marges pour un aperçu mobile */
+            }
+        }
     </style>
     <script>
         function switchLanguage(language) {
-            const translations = {
-                'fr': {
-                    title: 'Couscous Royal',
-                    overview: 'Présentation',
-                    calories: 'Calories',
-                    components: 'Composants principaux',
-                    allergies: 'Allergènes',
-                    history: 'Histoire',
-                    serving: 'Présentation'
-                },
-                'en': {
-                    title: 'Royal Couscous',
-                    overview: 'Overview',
-                    calories: 'Calories',
-                    components: 'Main Ingredients',
-                    allergies: 'Allergens',
-                    history: 'History',
-                    serving: 'Serving'
-                },
-                'es': {
-                    title: 'Cuscús Real',
-                    overview: 'Descripción',
-                    calories: 'Calorías',
-                    components: 'Ingredientes principales',
-                    allergies: 'Alergias',
-                    history: 'Historia',
-                    serving: 'Servicio'
-                },
-                'de': {
-                    title: 'Königlicher Couscous',
-                    overview: 'Überblick',
-                    calories: 'Kalorien',
-                    components: 'Hauptzutaten',
-                    allergies: 'Allergene',
-                    history: 'Geschichte',
-                    serving: 'Servieren'
-                },
-                'it': {
-                    title: 'Couscous Reale',
-                    overview: 'Panoramica',
-                    calories: 'Calorie',
-                    components: 'Ingredienti principali',
-                    allergies: 'Allergeni',
-                    history: 'Storia',
-                    serving: 'Servizio'
-                },
-                'pl': {
-                    title: 'Królewski Kus-kus',
-                    overview: 'Przegląd',
-                    calories: 'Kalorie',
-                    components: 'Główne składniki',
-                    allergies: 'Alergeny',
-                    history: 'Historia',
-                    serving: 'Serwowanie'
-                },
-                'ar': {
-                    title: 'كسكسي ملكي',
-                    overview: 'نظرة عامة',
-                    calories: 'السعرات الحرارية',
-                    components: 'المكونات الرئيسية',
-                    allergies: 'المواد المثيرة للحساسية',
-                    history: 'التاريخ',
-                    serving: 'طريقة التقديم'
-                }
+            const texts = {
+                'fr': 'Nwasser au poulet',
+                'en': 'Nwasser with Chicken',
+                'es': 'Nwasser con Pollo',
+                'de': 'Nwasser mit Hühnchen',
+                'it': 'Nwasser con Pollo',
+                'pl': 'Nwasser z Kurczakiem',
+                'ar': 'نواسير بالدجاج'
             };
 
-            const content = translations[language];
-            document.querySelector('header h1').textContent = content.title;
-            document.querySelector('.overview h2').textContent = content.overview;
-            document.querySelector('.calories h2').textContent = content.calories;
-            document.querySelector('.components h2').textContent = content.components;
-            document.querySelector('.allergies h2').textContent = content.allergies;
-            document.querySelector('.history h2').textContent = content.history;
-            document.querySelector('.serving h2').textContent = content.serving;
+            const overviews = {
+                'fr': 'Le Nwasser est un plat traditionnel tunisien préparé avec de la pâte fine, farci de poulet mariné et accompagné de légumes. Ce plat, qui se retrouve souvent dans les repas familiaux, est un véritable régal.',
+                'en': 'Nwasser is a traditional Tunisian dish made with thin dough filled with marinated chicken and accompanied by vegetables. This dish, often found in family meals, is a true delight.',
+                'es': 'Nwasser es un plato tunecino tradicional hecho con masa fina rellena de pollo marinado y acompañado de verduras. Este plato, que se encuentra a menudo en comidas familiares, es un verdadero deleite.',
+                'de': 'Nwasser ist ein traditionelles tunesisches Gericht, das aus dünnem Teig besteht, der mit mariniertem Hühnchen und Gemüse gefüllt ist. Dieses Gericht, das oft bei Familienmahlzeiten vorkommt, ist eine wahre Freude.',
+                'it': 'Nwasser è un piatto tradizionale tunisino fatto con pasta sottile ripiena di pollo marinato e accompagnato da verdure. Questo piatto, spesso presente nei pasti familiari, è una vera delizia.',
+                'pl': 'Nwasser to tradycyjne tunezyjskie danie z cienkiego ciasta, nadziewane marynowanym kurczakiem i podawane z warzywami. To danie, często spotykane podczas rodzinnych posiłków, to prawdziwa rozkosz.',
+                'ar': 'النواسير هو طبق تقليدي تونسي مصنوع من العجين الرقيق المحشي بالدجاج المتبل والمدعم بالخضار. هذا الطبق، الذي يوجد غالبًا في الوجبات العائلية، هو لذة حقيقية.'
+            };
+
+            const calories = {
+                'fr': 'Environ 400 calories par portion (approximativement 190 g).',
+                'en': 'About 400 calories per serving (approximately 190 g).',
+                'es': 'Alrededor de 400 calorías por porción (aproximadamente 190 g).',
+                'de': 'Etwa 400 Kalorien pro Portion (ungefähr 190 g).',
+                'it': 'Circa 400 calorie per porzione (approssimativamente 190 g).',
+                'pl': 'Około 400 kalorii na porcję (około 190 g).',
+                'ar': 'حوالي 400 سعرة حرارية لكل حصة (حوالي 190 غرامًا).'
+            };
+
+            const components = {
+                'fr': 'Ingrédients principaux : Pâte fine, poulet mariné, oignons, poivrons, épices tunisiennes.',
+                'en': 'Main ingredients: Thin dough, marinated chicken, onions, bell peppers, Tunisian spices.',
+                'es': 'Ingredientes principales: Masa fina, pollo marinado, cebollas, pimientos, especias tunecinas.',
+                'de': 'Hauptzutaten: Dünner Teig, mariniertes Hähnchen, Zwiebeln, Paprika, tunesische Gewürze.',
+                'it': 'Ingredienti principali: Pasta sottile, pollo marinato, cipolle, peperoni, spezie tunisine.',
+                'pl': 'Główne składniki: Cienkie ciasto, marynowany kurczak, cebula, papryka, przyprawy tunezyjskie.',
+                'ar': 'المكونات الرئيسية: عجينة رقيقة، دجاج متبل، بصل، فليفلة، توابل تونسية.'
+            };
+
+            const allergies = {
+                'fr': 'Allergènes : Peut contenir du gluten, du soja, et des noix.',
+                'en': 'Allergens: May contain gluten, soy, and nuts.',
+                'es': 'Alergénicos: Puede contener gluten, soja y nueces.',
+                'de': 'Allergene: Kann Gluten, Soja und Nüsse enthalten.',
+                'it': 'Allergeni: Può contenere glutine, soia e noci.',
+                'pl': 'Alergeny: Może zawierać gluten, soję i orzechy.',
+                'ar': 'المواد المثيرة للحساسية: قد تحتوي على الغلوتين وفول الصويا والمكسرات.'
+            };
+
+            const history = {
+                'fr': 'Le Nwasser est un plat emblématique de la cuisine tunisienne, souvent préparé lors des grandes occasions et des festivités. Sa recette varie selon les régions.',
+                'en': 'Nwasser is an iconic dish in Tunisian cuisine, often prepared for special occasions and celebrations. Its recipe varies by region.',
+                'es': 'Nwasser es un plato icónico de la cocina tunecina, a menudo preparado para ocasiones especiales y celebraciones. Su receta varía según la región.',
+                'de': 'Nwasser ist ein ikonisches Gericht der tunesischen Küche, das häufig zu besonderen Anlässen und Festen zubereitet wird. Das Rezept variiert je nach Region.',
+                'it': 'Nwasser è un piatto iconico della cucina tunisina, spesso preparato per occasioni speciali e celebrazioni. La sua ricetta varia a seconda della regione.',
+                'pl': 'Nwasser to ikoniczne danie kuchni tunezyjskiej, często przygotowywane na specjalne okazje i uroczystości. Jego przepis różni się w zależności od regionu.',
+                'ar': 'النواسير هو طبق أيقوني في المطبخ التونسي، وغالبًا ما يتم تحضيره في المناسبات الخاصة والاحتفالات. تختلف وصفتها حسب المنطقة.'
+            };
+
+            const serving = {
+                'fr': 'Le Nwasser se sert chaud, souvent avec du pain traditionnel et une sauce épicée à côté.',
+                'en': 'Nwasser is served hot, often alongside traditional bread and a spicy sauce.',
+                'es': 'Nwasser se sirve caliente, a menudo con pan tradicional y una salsa picante.',
+                'de': 'Nwasser wird heiß serviert, oft zusammen mit traditionellem Brot und einer scharfen Soße.',
+                'it': 'Nwasser è servito caldo, spesso accompagnato da pane tradizionale e una salsa piccante.',
+                'pl': 'Nwasser podaje się na gorąco, często z tradycyjnym chlebem i ostrą sosbed.',
+                'ar': 'يُقدّم النواسير ساخنًا، وغالبًا ما يكون ذلك مع خبز تقليدي وصلصة حارة.'
+            };
+
+            // Switch content based on the selected language
+            document.querySelector('.container h1').textContent = texts[language];
+            document.querySelector('.overview h2').textContent = language === 'en' ? 'Overview' : 
+                (language === 'es' ? 'Visión general' : 
+                (language === 'de' ? 'Übersicht' : 
+                (language === 'it' ? 'Panoramica' : 
+                (language === 'pl' ? 'Przegląd' : 
+                (language === 'ar' ? 'نظرة عامة' : 'Présentation')))));
+            document.querySelector('.nutrition-info h2').textContent = language === 'en' ? 'Nutrition Information' : 
+                (language === 'es' ? 'Información Nutricional' : 
+                (language === 'de' ? 'Nährwertinformationen' : 
+                (language === 'it' ? 'Informazioni Nutrizionali' : 
+                (language === 'pl' ? 'Informacje o Wartości Odżywczej' : 
+                (language === 'ar' ? 'معلومات التغذية' : 'Informations Nutritionnelles')))));
+            document.querySelector('.calories h2').textContent = language === 'en' ? 'Calories' : 
+                (language === 'es' ? 'Calorías' : 
+                (language === 'de' ? 'Kalorien' : 
+                (language === 'it' ? 'Calorie' : 
+                (language === 'pl' ? 'Kalorie' : 
+                (language === 'ar' ? 'السعرات الحرارية' : 'Calories')))));
+            document.querySelector('.components h2').textContent = language === 'en' ? 'Ingredients' :
+                (language === 'es' ? 'Ingredientes' : 
+                (language === 'de' ? 'Zutaten' : 
+                (language === 'it' ? 'Ingredienti' : 
+                (language === 'pl' ? 'Składniki' : 
+                (language === 'ar' ? 'المكونات' : 'Ingrédients')))));
+            document.querySelector('.allergies h2').textContent = language === 'en' ? 'Allergens' : 
+                (language === 'es' ? 'Alergénicos' : 
+                (language === 'de' ? 'Allergene' : 
+                (language === 'it' ? 'Allergeni' : 
+                (language === 'pl' ? 'Alergeny' : 
+                (language === 'ar' ? 'المواد المثيرة للحساسية' : 'Allergènes')))));
+            document.querySelector('.history h2').textContent = language === 'en' ? 'History' : 
+                (language === 'es' ? 'Historia' : 
+                (language === 'de' ? 'Geschichte' : 
+                (language === 'it' ? 'Storia' : 
+                (language === 'pl' ? 'Historia' : 
+                (language === 'ar' ? 'التاريخ' : 'Historique')))));
+            document.querySelector('.serving h2').textContent = language === 'en' ? 'Serving' : 
+                (language === 'es' ? 'Servicio' : 
+                (language === 'de' ? 'Servieren' : 
+                (language === 'it' ? 'Servire' : 
+                (language === 'pl' ? 'Serwowanie' : 
+                (language === 'ar' ? 'طريقة التقديم' : 'Service')))));
+
+            document.querySelector('.overview p').textContent = overviews[language];
+            
+            // Nutrition info in table format with translations
+            document.querySelector('.nutrition-info').innerHTML = `
+                <h2>${document.querySelector('.nutrition-info h2').textContent}</h2>
+                <table class="nutrition-table">
+                    <tr>
+                        <td><strong>${language === 'en' ? 'Per 100 g' : 'Pour 100 g'}</strong></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>${language === 'en' ? 'Energy:' : 'Énergie:'}</td>
+                        <td>210 kcal</td>
+                    </tr>
+                    <tr>
+                        <td>${language === 'en' ? 'Fat:' : 'Graisses:'}</td>
+                        <td>10 g</td>
+                    </tr>
+                    <tr>
+                        <td>${language === 'en' ? 'Carbohydrates:' : 'Glucides:'}</td>
+                        <td>25 g</td>
+                    </tr>
+                    <tr>
+                        <td>${language === 'en' ? 'Protein:' : 'Protéines:'}</td>
+                        <td>12 g</td>
+                    </tr>
+                    <tr>
+                        <td>${language === 'en' ? 'Salt:' : 'Sel:'}</td>
+                        <td>0.6 g</td>
+                    </tr>
+                </table>
+            `;
+            document.querySelector('.calories p').textContent = calories[language];
+            document.querySelector('.components p').textContent = components[language];
+            document.querySelector('.allergies p').textContent = allergies[language];
+            document.querySelector('.history p').textContent = history[language];
+            document.querySelector('.serving p').textContent = serving[language];
         }
     </script>
 </head>
 <body>
-
     <div class="container">
         <header>
-
-            <h1>Couscous Royal</h1>
+            <h1 id="dish-name">Nwasser au poulet</h1>
             <div class="flags">
-                <img src="https://flagcdn.com/fr.svg" alt="Français" title="Français" onclick="switchLanguage('fr')">
+                <img src="https://flagcdn.com/fr.svg" alt="French" title="Français" onclick="switchLanguage('fr')">
                 <img src="https://flagcdn.com/gb.svg" alt="English" title="English" onclick="switchLanguage('en')">
-                <img src="https://flagcdn.com/es.svg" alt="Español" title="Español" onclick="switchLanguage('es')">
-                <img src="https://flagcdn.com/de.svg" alt="Deutsch" title="Deutsch" onclick="switchLanguage('de')">
-                <img src="https://flagcdn.com/it.svg" alt="Italiano" title="Italiano" onclick="switchLanguage('it')">
-                <img src="https://flagcdn.com/pl.svg" alt="Polski" title="Polski" onclick="switchLanguage('pl')">
-                <img src="https://flagcdn.com/tn.svg" alt="العربية" title="العربية" onclick="switchLanguage('ar')">
+                <img src="https://flagcdn.com/es.svg" alt="Spanish" title="Español" onclick="switchLanguage('es')">
+                <img src="https://flagcdn.com/de.svg" alt="German" title="Deutsch" onclick="switchLanguage('de')">
+                <img src="https://flagcdn.com/it.svg" alt="Italian" title="Italiano" onclick="switchLanguage('it')">
+                <img src="https://flagcdn.com/pl.svg" alt="Polish" title="Polski" onclick="switchLanguage('pl')">
+                <img src="https://flagcdn.com/tn.svg" alt="Arabic" title="العربية" onclick="switchLanguage('ar')">
             </div>
         </header>
 
-
-        <img class="dish-image" src="https://fac.img.pmdstatic.net/fit/~1~fac~2018~07~30~94958cd5-6b38-46a6-a289-bb42cd7e2bd1.jpeg/850x478/quality/90/crop-from/center/couscous-royal-aux-3-viandes.jpeg" alt="Couscous Royal">
+        <img class="dish-image" src="https://allobledi.ifm.tn/uploads/news/allobledi/d0109eef39cccfbae75a7f13faed28b2-1626707528.jpg" alt="Nwasser au poulet">
+        
         <div class="overview">
-            <h2>Présentation</h2>
-            <p>Le Couscous Royal est un plat emblématique d'Afrique du Nord, composé de semoule de blé accompagnée de viandes variées, de légumes et d'épices.</p>
+            <h2>Aperçu</h2>
+            <p id="overview">Le Nwasser est un plat traditionnel tunisien préparé avec de la pâte fine, farci de poulet mariné et accompagné de légumes. Ce plat, qui se retrouve souvent dans les repas familiaux, est un véritable régal.</p>
+        </div>
+
+        <div class="nutrition-info">
+            <h2>Information Nutritionnelle</h2>
+            <table class="nutrition-table">
+                <tr>
+                    <td><strong>Pour 100 g</strong></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Énergie:</td>
+                    <td>210 kcal</td>
+                </tr>
+                <tr>
+                    <td>Graisses:</td>
+                    <td>10 g</td>
+                </tr>
+                <tr>
+                    <td>Glucides:</td>
+                    <td>25 g</td>
+                </tr>
+                <tr>
+                    <td>Protéines:</td>
+                    <td>12 g</td>
+                </tr>
+                <tr>
+                    <td>Sel:</td>
+                    <td>0.6 g</td>
+                </tr>
+            </table>
         </div>
 
         <div class="calories">
             <h2>Calories</h2>
-            <p>Environ 400 calories par portion.</p>
+            <p id="calories">Environ 400 calories par portion (approximativement 190 g).</p>
         </div>
 
         <div class="components">
             <h2>Composants principaux</h2>
-            <p>Semoule de blé, agneau, poulet, merguez, courgettes, carottes, pois chiches, épices (cumin, curcuma, paprika).</p>
+            <p id="components">Ingrédients principaux : Pâte fine, poulet mariné, oignons, poivrons, épices tunisiennes.</p>
         </div>
 
         <div class="allergies">
             <h2>Allergènes</h2>
-            <p>Contient du gluten et peut contenir des traces de fruits à coque.</p>
+            <p id="allergies">Allergènes : Peut contenir du gluten, du soja, et des noix.</p>
         </div>
 
         <div class="history">
             <h2>Histoire</h2>
-            <p>Originaire d'Afrique du Nord, le couscous est un plat ancien qui symbolise le partage et la convivialité.</p>
+            <p id="history">Le Nwasser est un plat emblématique de la cuisine tunisienne, souvent préparé lors des grandes occasions et des festivités. Sa recette varie selon les régions.</p>
         </div>
 
         <div class="serving">
             <h2>Présentation</h2>
-            <p>Le Couscous Royal se sert avec une sauce épicée à base de tomate et un bol de bouillon chaud.</p>
+            <p id="serving">Le Nwasser se sert chaud, souvent avec du pain traditionnel et une sauce épicée à côté.</p>
         </div>
 
         <div class="back-to-top">
             <a href="#">Retour en haut</a>
         </div>
-
-<p style="text-align: center; font-size: 12px;">&copy; 2025 Seabel Rym Beach Hotel. Tous droits réservés.</p>
+        <p style="text-align: center; font-size: 12px;">&copy; 2025 Seabel Rym Beach Hotel. Tous droits réservés.</p>
     </div>
-        <img class="logo" src="https://www.seabelhotels.com/wp-content/uploads/2021/12/Logo_slide_rym_beach.png" alt="Seabel Rym Beach Hotel Logo">
-        </div>
-
-
-
+    <img class="logo" src="https://www.seabelhotels.com/wp-content/uploads/2021/12/Logo_slide_rym_beach.png" alt="Seabel Rym Beach Hotel Logo">
 </body>
 </html>
